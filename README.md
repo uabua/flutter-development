@@ -1,2 +1,2 @@
-# flutter-development-course
+# flutter-development
 Mobile Application Development (Flutter)
