@@ -1,6 +1,8 @@
 # assignment_01
 
-A new Flutter project.
+![gif](assets/gifs/planets.gif)
+
+A little Flutter project to show three planets.
 
 ## Getting Started
 
