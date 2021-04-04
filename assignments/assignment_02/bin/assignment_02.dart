@@ -7,10 +7,16 @@ import 'package:assignment_02/player.dart';
 
 void main(List<String> arguments) {
   // OOP version
-  final game = Game(Player('You'), Player('Computer'), Dice(6));
+  final game = Game(
+    Player('You'),
+    Player('Computer'),
+    Dice(6),
+  );
 
-  stdout.write('Let\'s play Dice Game!'
-      '\nPlease, push enter button to play or enter exit to quit.\n>>>');
+  stdout.write(
+    'Let\'s play Dice Game!'
+    '\nPlease, push enter button to play or enter exit to quit.\n>>>',
+  );
 
   while (stdin.readLineSync() != 'exit') {
     game.play();

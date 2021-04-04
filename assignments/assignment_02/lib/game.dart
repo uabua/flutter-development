@@ -9,7 +9,11 @@ class Game {
   int diceOne, diceTwo;
   int playerOneTotal, playerTwoTotal;
 
-  Game(this.playerOne, this.playerTwo, this.dice);
+  Game(
+    this.playerOne,
+    this.playerTwo,
+    this.dice,
+  );
 
   void play() {
     diceOne = dice.rollTheDice();
@@ -40,8 +44,10 @@ class Game {
       stdout.writeln('Draw!');
     }
 
-    stdout.writeln('${playerOne.name} ${playerOne.score}'
-        ' - '
-        '${playerTwo.score} ${playerTwo.name}');
+    stdout.writeln(
+      '${playerOne.name} ${playerOne.score}'
+      ' - '
+      '${playerTwo.score} ${playerTwo.name}',
+    );
   }
 }
