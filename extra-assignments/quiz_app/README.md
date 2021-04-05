@@ -1,6 +1,8 @@
 # quiz_app
 
-A new Flutter project.
+![gif](assets/quiz.gif)
+
+## Quiz: Which city was this band formed in?
 
 ## Getting Started
 
