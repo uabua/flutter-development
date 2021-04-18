@@ -1,13 +1,14 @@
 # assignment_03
 
-* Portrait Mode
+### Portrait Mode
+
 ![portrait](assets/portrait.gif)
 
-* Landscape Mode
+### Landscape Mode
+
 ![landscape](assets/landscape.gif)
 
 A little Flutter project to show three planets.
-
 
 ## Getting Started
 
