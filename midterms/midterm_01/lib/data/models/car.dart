@@ -1,6 +1,4 @@
-// import 'package:meta/meta.dart';
 import 'package:flutter/foundation.dart';
-// დავტოვო რომელიც სჯობს
 
 class Car {
   final int id;
