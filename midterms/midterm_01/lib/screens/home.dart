@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:midterm_01/data/cars.dart';
+import 'package:midterm_01/widgets/car_item.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -16,7 +17,14 @@ class _HomeState extends State<Home> {
       ),
       body: ListView.builder(
         itemCount: cars.length,
-        // itemBuilder: (context, index) {},
+        itemBuilder: (context, index) {
+          var car = cars[index];
+          return CarItem(
+            imageUrl: car.imageUrl,
+            name: "${car.brand} ${car.model}",
+            year: car.year,
+          );
+        },
       ),
     );
   }
