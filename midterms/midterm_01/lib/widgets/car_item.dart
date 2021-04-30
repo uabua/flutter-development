@@ -21,9 +21,12 @@ class CarItem extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: FadeInImage(
-                placeholder:
-                    AssetImage("assets/placeholders/car_placeholder.webp"),
-                image: NetworkImage(imageUrl),
+                placeholder: AssetImage(
+                  "assets/placeholders/car_placeholder.webp",
+                ),
+                image: NetworkImage(
+                  imageUrl,
+                ),
                 width: 300,
                 height: 200,
               ),
