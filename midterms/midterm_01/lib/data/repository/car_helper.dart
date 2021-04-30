@@ -17,8 +17,8 @@ class CarHelper {
   int getNewId() {
     if (cars.isNotEmpty) {
       return cars.last.id + 1;
-    } else {
-      return 1;
     }
+
+    return 1;
   }
 }
