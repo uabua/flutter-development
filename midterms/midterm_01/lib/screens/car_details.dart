@@ -63,41 +63,49 @@ class CarDetails extends StatelessWidget {
                 width: 350,
                 height: 250,
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Column(
-                      children: [
-                        Text(
-                          "Brand:",
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        Text(
-                          "Model: ",
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                        Text(
-                          "Year: ",
-                          style: Theme.of(context).textTheme.bodyText1,
-                        ),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text(car.brand),
-                        Text(car.model),
-                        Text("${car.year}"),
-                      ],
-                    ),
-                  ],
+              Container(
+                width: double.infinity,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Brand:",
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                          Text(
+                            "Model: ",
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                          Text(
+                            "Year: ",
+                            style: Theme.of(context).textTheme.bodyText1,
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(car.brand),
+                          Text(car.model),
+                          Text("${car.year}"),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              Text(
-                car.description,
-                style: Theme.of(context).textTheme.bodyText1,
-                textAlign: TextAlign.center,
+              Container(
+                width: 350,
+                child: Text(
+                  car.description,
+                  style: Theme.of(context).textTheme.bodyText1,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ],
           ),
