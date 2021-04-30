@@ -13,4 +13,12 @@ class CarHelper {
   void editCar(int index, Car car) {
     cars[index] = car;
   }
+
+  int getNewId() {
+    if (cars.isNotEmpty) {
+      return cars.last.id + 1;
+    } else {
+      return 1;
+    }
+  }
 }
