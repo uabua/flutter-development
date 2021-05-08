@@ -73,6 +73,7 @@ class _AddMovieState extends State<AddMovie> {
                   child: TextFormField(
                     controller: description,
                     keyboardType: TextInputType.multiline,
+                    minLines: 1,
                     maxLines: 8,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
