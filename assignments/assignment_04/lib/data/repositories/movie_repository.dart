@@ -2,6 +2,8 @@ import 'package:assignment_04/data/models/movie.dart';
 import 'package:flutter/material.dart';
 
 class MovieRepository extends ChangeNotifier {
+  late List<Movie> _moviesForCategory;
+
   List<Movie> _movies = [
     Movie(
       id: 1,
@@ -125,18 +127,51 @@ class MovieRepository extends ChangeNotifier {
     ),
   ];
 
+  MovieRepository() {
+    _moviesForCategory = _movies;
+  }
+
+  List<Movie> get movies => _moviesForCategory;
+
+  void getAllMovies() {
+    _moviesForCategory = _movies;
+    notifyListeners();
+  }
+
+  void getRecentlyAdded() {
+    _moviesForCategory =
+        _movies.where((item) => item.category == "Recently Added").toList();
+    notifyListeners();
+  }
+
+  void getMyFavorites() {
+    _moviesForCategory =
+        _movies.where((item) => item.category == "My Favorites").toList();
+    notifyListeners();
+  }
+
   void addMovie(Movie movie) {
     _movies.add(movie);
+
+    // add movie in _moviesForCategory if category is same
+    if (_moviesForCategory.first.category == movie.category) {
+      _moviesForCategory.add(movie);
+    }
+
     notifyListeners();
   }
 
   void removeMovie(int index) {
-    _movies.removeAt(index);
+    _movies
+        .removeWhere((element) => element.id == _moviesForCategory[index].id);
+    _moviesForCategory.removeAt(index);
     notifyListeners();
   }
 
   void editMovie(int index, Movie movie) {
-    _movies[index] = movie;
+    _moviesForCategory[index] = movie;
+    _movies[_movies.indexWhere((element) => element.id == movie.id)] = movie;
+
     notifyListeners();
   }
 
@@ -146,15 +181,5 @@ class MovieRepository extends ChangeNotifier {
     }
 
     return 1;
-  }
-
-  List<Movie> get movies => _movies;
-
-  List<Movie> getRecentlyAdded() {
-    return _movies.where((item) => item.category == "Recently Added").toList();
-  }
-
-  List<Movie> getMyFavorites() {
-    return _movies.where((item) => item.category == "My Favorites").toList();
   }
 }
