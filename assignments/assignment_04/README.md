@@ -1,10 +1,8 @@
 # assignment_04
 
-A new Flutter project.
+![portrait](assets/gifs/movies_app.gif)
 
 ## Getting Started
-
-This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 

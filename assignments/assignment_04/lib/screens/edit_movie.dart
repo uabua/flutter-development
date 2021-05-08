@@ -189,7 +189,6 @@ class _EditMovieState extends State<EditMovie> {
                         onChanged: (value) {
                           setState(() {
                             category = value!;
-                            print(category);
                           });
                         },
                         items: <String>[
@@ -216,7 +215,9 @@ class _EditMovieState extends State<EditMovie> {
                       ),
                       ElevatedButton(
                         onPressed: () {
+                          print("hello");
                           if (_formKey.currentState!.validate()) {
+                            print("hell");
                             Movie editedMovie = Movie(
                               id: id,
                               name: name.text,

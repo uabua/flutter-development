@@ -171,7 +171,6 @@ class MovieRepository extends ChangeNotifier {
   void editMovie(int index, Movie movie) {
     _moviesForCategory[index] = movie;
     _movies[_movies.indexWhere((element) => element.id == movie.id)] = movie;
-
     notifyListeners();
   }
 
