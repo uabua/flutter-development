@@ -98,6 +98,7 @@ class _EditMovieState extends State<EditMovie> {
                   child: TextFormField(
                     controller: description,
                     keyboardType: TextInputType.multiline,
+                    maxLines: 8,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: "Please enter Description",
@@ -215,9 +216,7 @@ class _EditMovieState extends State<EditMovie> {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          print("hello");
                           if (_formKey.currentState!.validate()) {
-                            print("hell");
                             Movie editedMovie = Movie(
                               id: id,
                               name: name.text,

@@ -169,7 +169,12 @@ class MovieRepository extends ChangeNotifier {
   }
 
   void editMovie(int index, Movie movie) {
-    _moviesForCategory[index] = movie;
+    if (movie.category == _moviesForCategory[index].category) {
+      _moviesForCategory[index] = movie;
+    } else {
+      _moviesForCategory.removeAt(index);
+    }
+
     _movies[_movies.indexWhere((element) => element.id == movie.id)] = movie;
     notifyListeners();
   }
