@@ -17,6 +17,7 @@ class MovieDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Details"),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Padding(
