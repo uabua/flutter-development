@@ -1,4 +1,6 @@
 import 'package:assignment_04/data/repositories/movie_repository.dart';
+import 'package:assignment_04/screens/add_movie.dart';
+import 'package:assignment_04/screens/edit_movie.dart';
 import 'package:assignment_04/screens/home.dart';
 import 'package:assignment_04/screens/movie_details.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +13,8 @@ void main() {
       home: Home(),
       routes: {
         MovieDetails.routeName: (context) => MovieDetails(),
-        // EditCar.routeName: (context) => EditCar(),
-        // AddCar.routeName: (context) => AddCar(),
+        AddMovie.routeName: (context) => AddMovie(),
+        EditMovie.routeName: (context) => EditMovie(),
       },
     ),
   ));
