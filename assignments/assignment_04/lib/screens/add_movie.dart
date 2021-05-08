@@ -18,9 +18,10 @@ class _AddMovieState extends State<AddMovie> {
   final TextEditingController imageUrl = TextEditingController();
   String category = "Recently Added";
 
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     final int id = Provider.of<MovieRepository>(
       context,
       listen: false,

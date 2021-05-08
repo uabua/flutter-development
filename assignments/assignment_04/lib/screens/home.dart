@@ -1,5 +1,7 @@
 import 'package:assignment_04/data/models/movie.dart';
 import 'package:assignment_04/data/repositories/movie_repository.dart';
+import 'package:assignment_04/screens/add_movie.dart';
+import 'package:assignment_04/screens/edit_movie.dart';
 import 'package:assignment_04/screens/movie_details.dart';
 import 'package:assignment_04/widgets/movie_item.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +15,65 @@ class Home extends StatelessWidget {
         title: Text("Movies"),
         centerTitle: true,
       ),
-      // drawer: ,
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              child: Icon(
+                Icons.category,
+                color: Colors.white,
+                size: 70,
+              ),
+              decoration: BoxDecoration(
+                color: Colors.blue,
+              ),
+            ),
+            ListTile(
+              title: Text("All Movies"),
+              leading: Icon(
+                Icons.movie,
+                color: Colors.black,
+              ),
+              onTap: () {
+                Provider.of<MovieRepository>(
+                  context,
+                  listen: false,
+                ).getAllMovies();
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text("Recently Added"),
+              leading: Icon(
+                Icons.folder,
+                color: Colors.black,
+              ),
+              onTap: () {
+                Provider.of<MovieRepository>(
+                  context,
+                  listen: false,
+                ).getRecentlyAdded();
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text("My Favorites"),
+              leading: Icon(
+                Icons.favorite,
+                color: Colors.black,
+              ),
+              onTap: () {
+                Provider.of<MovieRepository>(
+                  context,
+                  listen: false,
+                ).getMyFavorites();
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      ),
       body: Consumer<MovieRepository>(
         builder: (context, value, child) {
           List<Movie> movies = Provider.of<MovieRepository>(context).movies;
@@ -72,11 +132,11 @@ class Home extends StatelessWidget {
                     MovieDetails.routeName,
                     arguments: index,
                   ),
-                  // onLongPress: () => Navigator.pushNamed(
-                  //   context,
-                  //   EditCar.routeName,
-                  //   arguments: index,
-                  // ).then((_) => setState(() {})),
+                  onLongPress: () => Navigator.pushNamed(
+                    context,
+                    EditMovie.routeName,
+                    arguments: index,
+                  ),
                   child: MovieItem(
                     imageUrl: movie.imageUrl,
                     name: movie.name,
@@ -90,8 +150,13 @@ class Home extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
-        child: Icon(Icons.add),
+        onPressed: () => Navigator.pushNamed(
+          context,
+          AddMovie.routeName,
+        ),
+        child: Icon(
+          Icons.add,
+        ),
       ),
     );
   }
