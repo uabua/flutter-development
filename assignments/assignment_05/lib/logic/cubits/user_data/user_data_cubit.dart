@@ -13,9 +13,13 @@ class UserDataCubit extends Cubit<UserDataState> {
   Future<void> getUserData() async {
     try {
       var list = await userRepository.fetchUsers();
-      emit(UserDataLoaded(users: list!));
+      emit(UserDataLoaded(
+        users: list!,
+      ));
     } catch (e) {
-      emit(UserDataError(message: e.toString()));
+      emit(UserDataError(
+        message: e.toString(),
+      ));
     }
   }
 }
