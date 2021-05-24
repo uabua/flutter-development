@@ -1,10 +1,14 @@
 import 'package:assignment_05/logic/cubits/todo_data/todo_data_cubit.dart';
+import 'package:assignment_05/presentation/screens/add_todo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Todo extends StatelessWidget {
-  const Todo({Key? key, required this.userID}) : super(key: key);
-  final String userID;
+  const Todo({
+    Key? key,
+    required this.userId,
+  }) : super(key: key);
+  final String userId;
 
   @override
   Widget build(BuildContext context) {
@@ -25,17 +29,41 @@ class Todo extends StatelessWidget {
               itemBuilder: (context, index) {
                 var todo = state.todos[index];
 
-                return ListTile(
-                  title: Text(todo.title!),
-                  trailing: todo.completed!
-                      ? const Icon(
-                          Icons.done,
-                          color: Colors.green,
-                        )
-                      : const Icon(
-                          Icons.close,
-                          color: Colors.red,
-                        ),
+                return Dismissible(
+                  key: Key(index.toString()),
+                  direction: DismissDirection.endToStart,
+                  onDismissed: (direction) {
+                    BlocProvider.of<TodoDataCubit>(context).deleteTodoData(
+                      todo.id!,
+                    );
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Successfully removed "${todo.title}"!'),
+                        backgroundColor: Colors.green,
+                      ),
+                    );
+                  },
+                  background: Container(
+                    alignment: Alignment.centerRight,
+                    color: Colors.red,
+                    child: const Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                    ),
+                  ),
+                  child: ListTile(
+                    title: Text(todo.title!),
+                    trailing: todo.completed!
+                        ? const Icon(
+                            Icons.done,
+                            color: Colors.green,
+                          )
+                        : const Icon(
+                            Icons.close,
+                            color: Colors.red,
+                          ),
+                  ),
                 );
               },
             );
@@ -53,6 +81,18 @@ class Todo extends StatelessWidget {
               ),
             );
           }
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(
+          Icons.add,
+        ),
+        onPressed: () {
+          Navigator.pushNamed(
+            context,
+            AddTodo.routeName,
+            arguments: userId,
+          );
         },
       ),
     );
