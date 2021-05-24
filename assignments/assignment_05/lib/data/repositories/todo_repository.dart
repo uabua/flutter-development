@@ -5,9 +5,22 @@ class TodoRepository {
   List<Todo>? todos = [];
   Dio dio = Dio();
 
-  Future<List<Todo>>? fetchTodoByUserID(String userID) async {
+  Future<void> addTodoData(Map<String, dynamic> todoData) async =>
+      await dio.post(
+        'https://jsonplaceholder.typicode.com/posts',
+        data: {
+          'userId': todoData['userId'],
+          'title': todoData['title'],
+        },
+      );
+
+  Future<void> deleteTodoData(int todoId) async => await dio.delete(
+        'https://jsonplaceholder.typicode.com/posts/$todoId',
+      );
+
+  Future<List<Todo>>? fetchTodoByUserID(String userId) async {
     var response = await dio
-        .get('https://jsonplaceholder.typicode.com/users/$userID/todos');
+        .get('https://jsonplaceholder.typicode.com/users/$userId/todos');
     if (response.statusCode == 200) {
       List<Todo> loadedTodos = [];
 
