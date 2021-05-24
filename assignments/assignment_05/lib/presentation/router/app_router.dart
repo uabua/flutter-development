@@ -1,3 +1,4 @@
+import 'package:assignment_05/presentation/screens/add_todo.dart';
 import 'package:assignment_05/presentation/screens/todo.dart';
 import 'package:assignment_05/presentation/screens/home.dart';
 import 'package:flutter/material.dart';
@@ -9,11 +10,19 @@ class AppRouter {
         builder: (_) => const Home(),
       );
     } else if (settings.name == '/todo') {
-      var userID = settings.arguments as String;
+      var userId = settings.arguments as String;
 
       return MaterialPageRoute(
         builder: (_) => Todo(
-          userID: userID,
+          userId: userId,
+        ),
+      );
+    } else if (settings.name == AddTodo.routeName) {
+      var userId = settings.arguments as String;
+
+      return MaterialPageRoute(
+        builder: (_) => AddTodo(
+          userId: userId,
         ),
       );
     } else {
