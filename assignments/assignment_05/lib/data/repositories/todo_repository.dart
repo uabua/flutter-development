@@ -7,6 +7,7 @@ class TodoRepository {
 
   Future<void> addTodoData(Map<String, dynamic> todoData) async =>
       await dio.post(
+        // substitute URL for the target endpoint
         'https://jsonplaceholder.typicode.com/posts',
         data: {
           'userId': todoData['userId'],
@@ -15,6 +16,7 @@ class TodoRepository {
       );
 
   Future<void> deleteTodoData(int todoId) async => await dio.delete(
+        // substitute URL for the target endpoint
         'https://jsonplaceholder.typicode.com/posts/$todoId',
       );
 
