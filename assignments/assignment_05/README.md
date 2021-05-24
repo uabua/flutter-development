@@ -1,6 +1,6 @@
 # assignment_05
 
-A new Flutter project.
+![app](assets/app.gif)
 
 ## Getting Started
 
