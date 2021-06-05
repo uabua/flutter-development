@@ -68,7 +68,6 @@ class Episodes extends StatelessWidget {
                               ),
                               Text(
                                 'Air Date: ${state.episode.airDate}',
-                                style: Theme.of(context).textTheme.caption,
                               ),
                             ],
                           );
