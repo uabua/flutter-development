@@ -1,10 +1,15 @@
 # assignment_06
 
-A new Flutter project.
+## Rick & Morty app ⭐
+
+![gif](assets/gifs/app.gif)
+
+* All characters from Rick & Morty.
+* Press long to see character details.
+* Press  to see list of episodes in which this character appeared.
+* Press to see episode details. 
 
 ## Getting Started
-
-This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
