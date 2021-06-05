@@ -1,4 +1,4 @@
-import 'package:assignment_06/logic/cubits/episode_data_cubit.dart';
+import 'package:assignment_06/logic/cubits/episode_data/episode_data_cubit.dart';
 import 'package:assignment_06/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,6 +86,18 @@ class Episodes extends StatelessWidget {
                         }
                       },
                     ),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text("Cancel"),
+                        style: ButtonStyle(
+                          foregroundColor:
+                              MaterialStateProperty.all(Colors.white),
+                        ),
+                      ),
+                    ],
                   );
                 },
               );

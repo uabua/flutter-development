@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:assignment_06/data/models/character.dart';
-import 'package:assignment_06/logic/cubits/character_data_cubit.dart';
+import 'package:assignment_06/logic/cubits/character_data/character_data_cubit.dart';
 import 'package:assignment_06/presentation/screens/episodes.dart';
 import 'package:assignment_06/widgets/character_item.dart';
 import 'package:pagination_view/pagination_view.dart';
@@ -25,18 +25,16 @@ class Home extends StatelessWidget {
             );
           } else if (state is CharacterDataLoaded) {
             return PaginationView<Character>(
-              itemBuilder:
-                  (BuildContext context, Character character, int index) {
+              itemBuilder: (
+                BuildContext context,
+                Character character,
+                int index,
+              ) {
                 return GestureDetector(
                   child: CharacterItem(
                     image: character.image,
                     name: character.name,
                     status: character.status,
-                    species: character.species,
-                    type: character.type,
-                    gender: character.gender,
-                    origin: character.origin.name,
-                    location: character.location.name,
                   ),
                   onTap: () => Navigator.pushNamed(
                     context,
@@ -46,7 +44,51 @@ class Home extends StatelessWidget {
                   onLongPress: () => showDialog(
                     context: context,
                     builder: (_) => AlertDialog(
-                      title: Text(character.name),
+                      title: Text(
+                        character.name,
+                        textAlign: TextAlign.center,
+                      ),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Status - ${character.status}',
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            'Species - ${character.species == '' ? 'N/A' : character.species}',
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            'Type - ${character.type == '' ? 'N/A' : character.type}',
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            'Gender - ${character.gender}',
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            'Origin - ${character.origin.name}',
+                            textAlign: TextAlign.center,
+                          ),
+                          Text(
+                            'Last known location - ${character.location.name}',
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("Cancel"),
+                          style: ButtonStyle(
+                            foregroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 );
@@ -83,26 +125,9 @@ class Home extends StatelessWidget {
                 child: CircularProgressIndicator(),
               ),
             );
-
-            // return ListTile(
-            //   onTap: () => Navigator.pushNamed(
-            //     context,
-            //     CharacterDetails.routeName,
-            //     arguments: index,
-            //   ),
-            //   title: Text(character.name),
-            //   leading: CircleAvatar(
-            //     backgroundImage: NetworkImage(
-            //       character.image,
-            //     ),
-            //     backgroundColor: Colors.transparent,
-            //   ),
-            // );
-            // },
-            // );
           } else {
             return const Center(
-              child: Text('Ops! Something went wrong!'),
+              child: Text('Oops! Something went wrong!'),
             );
           }
         },
