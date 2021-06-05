@@ -1,5 +1,5 @@
-import 'package:assignment_06/logic/cubits/character_data_cubit.dart';
-import 'package:assignment_06/logic/cubits/episode_data_cubit.dart';
+import 'package:assignment_06/logic/cubits/character_data/character_data_cubit.dart';
+import 'package:assignment_06/logic/cubits/episode_data/episode_data_cubit.dart';
 import 'package:assignment_06/presentation/router/app_router.dart';
 import 'package:assignment_06/utils/app_bloc_observer.dart';
 import 'package:flutter/material.dart';
