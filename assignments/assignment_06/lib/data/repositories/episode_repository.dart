@@ -7,7 +7,7 @@ class EpisodeRepository {
 
   Future<Episode?> fetchEpisode(int episodeId) async {
     final response = await dio.get(
-      "https://rickandmortyapi.com/api/episode/$episodeId",
+      'https://rickandmortyapi.com/api/episode/$episodeId',
     );
 
     if (response.statusCode == 200) {

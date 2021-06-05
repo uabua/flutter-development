@@ -2,10 +2,10 @@ import 'package:assignment_06/data/models/character.dart';
 import 'package:dio/dio.dart';
 
 class CharacterRepository {
-  List<Character> characters = [];
+  List<Character>? characters = [];
   Dio dio = Dio();
 
-  Future<List<Character>> fetchCharacters({int page = 1}) async {
+  Future<List<Character>>? fetchCharacters({int page = 1}) async {
     final response = await dio.get(
       'https://rickandmortyapi.com/api/character?page=$page',
     );
@@ -18,10 +18,10 @@ class CharacterRepository {
         loadedCharacters.add(characterModel);
         characters = loadedCharacters;
 
-        return characters;
+        return characters!;
       });
     }
 
-    return characters;
+    return characters!;
   }
 }
