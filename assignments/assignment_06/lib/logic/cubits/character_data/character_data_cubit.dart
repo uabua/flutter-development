@@ -17,7 +17,7 @@ class CharacterDataCubit extends Cubit<CharacterDataState> {
       var characters = await characterRepository.fetchCharacters(page: page);
 
       emit(CharacterDataLoaded(
-        characters: characters,
+        characters: characters!,
       ));
     } catch (e) {
       emit(CharacterDataError(
