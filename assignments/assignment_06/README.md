@@ -1,6 +1,6 @@
 # assignment_06
 
-## Rick & Morty app ⭐
+## Rick & Morty app
 
 ![gif](assets/gifs/app.gif)
 
