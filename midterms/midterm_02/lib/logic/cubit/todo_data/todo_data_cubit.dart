@@ -10,22 +10,6 @@ class TodoDataCubit extends Cubit<TodoDataState> {
 
   final todoRepository = TodoRepository();
 
-  Future<void> readAll() async {
-    emit(TodoDataInitial());
-
-    try {
-      var todos = await todoRepository.readAll();
-
-      emit(TodoDataLoaded(
-        todos: todos,
-      ));
-    } catch (e) {
-      emit(TodoDataError(
-        message: e.toString(),
-      ));
-    }
-  }
-
   Future<void> create(Todo todo) async {
     emit(TodoDataInitial());
 
@@ -35,6 +19,38 @@ class TodoDataCubit extends Cubit<TodoDataState> {
       // emit(TodoDataLoaded(
       //   todos: todos,
       // ));
+    } catch (e) {
+      emit(TodoDataError(
+        message: e.toString(),
+      ));
+    }
+  }
+
+  Future<void> update(String docId, Todo todo) async {
+    emit(TodoDataInitial());
+
+    try {
+      await todoRepository.update(docId, todo);
+
+      // emit(TodoDataLoaded(
+      //   todos: todos,
+      // ));
+    } catch (e) {
+      emit(TodoDataError(
+        message: e.toString(),
+      ));
+    }
+  }
+
+  Future<void> readAll() async {
+    emit(TodoDataInitial());
+
+    try {
+      var todos = await todoRepository.readAll();
+
+      emit(TodoDataLoaded(
+        todos: todos,
+      ));
     } catch (e) {
       emit(TodoDataError(
         message: e.toString(),

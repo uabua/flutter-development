@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:midterm_02/data/repositories/todo_repository.dart';
 import 'package:midterm_02/logic/cubit/todo_data/todo_data_cubit.dart';
 import 'package:midterm_02/presentation/screens/add_todo.dart';
+import 'package:midterm_02/presentation/screens/edit_todo.dart';
 
 class Todos extends StatelessWidget {
   static const routeName = '/todos';
@@ -48,13 +49,13 @@ class Todos extends StatelessWidget {
                             BlocProvider.of<TodoDataCubit>(context).delete(
                               todo.id,
                             );
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                    'Successfully removed "${todo.task}"!'),
-                                backgroundColor: Colors.green,
-                              ),
-                            );
+                            // ScaffoldMessenger.of(context).showSnackBar(
+                            //   SnackBar(
+                            //     content: Text(
+                            //         'Successfully removed "${todo.task}"!'),
+                            //     backgroundColor: Colors.green,
+                            //   ),
+                            // );
 
                             Navigator.pop(context);
                           },
@@ -79,6 +80,11 @@ class Todos extends StatelessWidget {
                   ),
                   child: ListTile(
                     title: Text(todo.topic),
+                    onLongPress: () => Navigator.pushNamed(
+                      context,
+                      EditTodo.routeName,
+                      arguments: todo,
+                    ),
                   ),
                 );
               },

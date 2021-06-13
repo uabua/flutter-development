@@ -39,7 +39,17 @@ class TodoRepository {
     return todos;
   }
 
-  //აფდეითი აქ
+  Future<void> update(String docId, Todo todo) async {
+    DocumentReference documentReference = _todosCollectionReference
+        .doc(userId)
+        .collection('user todos')
+        .doc(docId);
+
+    await documentReference
+        .update(todo.toJson())
+        .whenComplete(() => print('Todo is updated!'))
+        .catchError((errorMessage) => print(errorMessage));
+  }
 
   Future<void> delete(String docId) async {
     DocumentReference documentReference = _todosCollectionReference
