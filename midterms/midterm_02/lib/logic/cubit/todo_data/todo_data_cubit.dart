@@ -15,26 +15,6 @@ class TodoDataCubit extends Cubit<TodoDataState> {
 
     try {
       await todoRepository.create(todo);
-
-      // emit(TodoDataLoaded(
-      //   todos: todos,
-      // ));
-    } catch (e) {
-      emit(TodoDataError(
-        message: e.toString(),
-      ));
-    }
-  }
-
-  Future<void> update(String docId, Todo todo) async {
-    emit(TodoDataInitial());
-
-    try {
-      await todoRepository.update(docId, todo);
-
-      // emit(TodoDataLoaded(
-      //   todos: todos,
-      // ));
     } catch (e) {
       emit(TodoDataError(
         message: e.toString(),
@@ -58,15 +38,35 @@ class TodoDataCubit extends Cubit<TodoDataState> {
     }
   }
 
+  Future<void> update(String docId, Todo todo) async {
+    emit(TodoDataInitial());
+
+    try {
+      await todoRepository.update(docId, todo);
+    } catch (e) {
+      emit(TodoDataError(
+        message: e.toString(),
+      ));
+    }
+  }
+
+  Future<void> toggleCompletion(String docId, bool isCompleted) async {
+    emit(TodoDataInitial());
+
+    try {
+      await todoRepository.toggleCompletion(docId, isCompleted);
+    } catch (e) {
+      emit(TodoDataError(
+        message: e.toString(),
+      ));
+    }
+  }
+
   Future<void> delete(String docId) async {
     emit(TodoDataInitial());
 
     try {
       await todoRepository.delete(docId);
-
-      // emit(TodoDataLoaded(
-      //   todos: todos,
-      // ));
     } catch (e) {
       emit(TodoDataError(
         message: e.toString(),
