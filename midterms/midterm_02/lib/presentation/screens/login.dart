@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:midterm_02/data/repositories/todo_repository.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:midterm_02/logic/cubit/todo_data/todo_data_cubit.dart';
 import 'package:midterm_02/presentation/screens/todos.dart';
 
 class Login extends StatefulWidget {
@@ -23,41 +24,71 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Form(
-        key: _formKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TextFormField(
-              controller: userId,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Please enter UserID',
-                labelText: 'UserID',
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Image(
+                  image: AssetImage('assets/icons/check.png'),
+                  height: 100,
+                ),
               ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter valid UserID!';
-                }
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Todo App✨',
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  controller: userId,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Please enter UserID',
+                    prefixIcon: Icon(
+                      Icons.account_circle,
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter valid UserID!';
+                    }
 
-                return null;
-              },
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  Navigator.pushNamed(
-                    context,
-                    Todos.routeName,
-                  );
+                    return null;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      Navigator.pushNamed(
+                        context,
+                        Todos.routeName,
+                        arguments: userId.text,
+                      );
 
-                  TodoRepository.userId = userId.text;
-                }
-              },
-              child: const Text('Login'),
-            ),
-          ],
+                      BlocProvider.of<TodoDataCubit>(context)
+                          .emit(TodoDataInitial());
+                    }
+                  },
+                  child: const Text('Login'),
+                  style: ElevatedButton.styleFrom(
+                    fixedSize: const Size(150, 40),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
