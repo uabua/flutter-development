@@ -15,7 +15,7 @@ void main() async {
     providers: [
       BlocProvider<TodoDataCubit>(
         create: (context) => TodoDataCubit(),
-      )
+      ),
     ],
     child: MaterialApp(
       title: 'Todo App',
