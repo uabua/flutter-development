@@ -5,30 +5,31 @@ final CollectionReference _todosCollectionReference =
     FirebaseFirestore.instance.collection('todos');
 
 class TodoRepository {
-  static String? userId;
+  String? userId;
 
   Future<void> create(Todo todo) async {
-    DocumentReference documentReference =
+    DocumentReference todoDocumentReference =
         _todosCollectionReference.doc(userId).collection('user todos').doc();
 
-    await documentReference
+    await todoDocumentReference
         .set(todo.toJson())
         .whenComplete(() => print('Todo is added!'))
-        .catchError((errorMessage) => print(errorMessage));
+        .catchError((errorMessage) => throw Exception(errorMessage));
   }
 
   Future<List<Todo>> readAll() async {
     List<Todo> todos = [];
-    CollectionReference todoReference =
+    CollectionReference todoCollectionReference =
         _todosCollectionReference.doc(userId).collection('user todos');
 
-    final reference = await todoReference.get();
+    final userTodos = await todoCollectionReference.orderBy('topic').get();
 
-    for (var doc in reference.docs) {
+    for (var doc in userTodos.docs) {
       var todo = Todo(
         topic: doc['topic'],
         task: doc['task'],
         description: doc['description'],
+        isCompleted: doc['is_completed'],
       );
 
       todo.id = doc.id;
@@ -48,7 +49,19 @@ class TodoRepository {
     await documentReference
         .update(todo.toJson())
         .whenComplete(() => print('Todo is updated!'))
-        .catchError((errorMessage) => print(errorMessage));
+        .catchError((errorMessage) => throw Exception(errorMessage));
+  }
+
+  Future<void> toggleCompletion(String docId, bool isCompleted) async {
+    DocumentReference documentReference = _todosCollectionReference
+        .doc(userId)
+        .collection('user todos')
+        .doc(docId);
+
+    await documentReference
+        .update({'is_completed': !isCompleted})
+        .whenComplete(() => print('Todo is completed!'))
+        .catchError((errorMessage) => throw Exception(errorMessage));
   }
 
   Future<void> delete(String docId) async {
@@ -60,6 +73,6 @@ class TodoRepository {
     await documentReference
         .delete()
         .whenComplete(() => print('Todo is deleted!'))
-        .catchError((errorMessage) => print(errorMessage));
+        .catchError((errorMessage) => throw Exception(errorMessage));
   }
 }
