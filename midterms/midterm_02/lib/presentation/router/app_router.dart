@@ -12,8 +12,12 @@ class AppRouter {
         builder: (_) => const Login(),
       );
     } else if (settings.name == Todos.routeName) {
+      String userId = settings.arguments as String;
+
       return MaterialPageRoute(
-        builder: (_) => const Todos(),
+        builder: (_) => Todos(
+          userId: userId,
+        ),
       );
     } else if (settings.name == AddTodo.routeName) {
       return MaterialPageRoute(
