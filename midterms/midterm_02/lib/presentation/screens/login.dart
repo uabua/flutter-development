@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:midterm_02/data/repositories/todo_repository.dart';
 import 'package:midterm_02/presentation/screens/todos.dart';
 
 class Login extends StatefulWidget {
@@ -50,6 +51,8 @@ class _LoginState extends State<Login> {
                     context,
                     Todos.routeName,
                   );
+
+                  TodoRepository.userId = userId.text;
                 }
               },
               child: const Text('Login'),
