@@ -41,4 +41,20 @@ class TodoDataCubit extends Cubit<TodoDataState> {
       ));
     }
   }
+
+  Future<void> delete(String docId) async {
+    emit(TodoDataInitial());
+
+    try {
+      await todoRepository.delete(docId);
+
+      // emit(TodoDataLoaded(
+      //   todos: todos,
+      // ));
+    } catch (e) {
+      emit(TodoDataError(
+        message: e.toString(),
+      ));
+    }
+  }
 }

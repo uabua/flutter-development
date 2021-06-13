@@ -28,8 +28,58 @@ class Todos extends StatelessWidget {
               itemBuilder: (context, index) {
                 var todo = state.todos[index];
 
-                return ListTile(
-                  title: Text(todo.topic),
+                return Dismissible(
+                  key: Key(index.toString()),
+                  direction: DismissDirection.endToStart,
+                  confirmDismiss: (direction) => showDialog(
+                    context: context,
+                    builder: (_) => AlertDialog(
+                      title: Text('Delete Confirmation'),
+                      content: Text(
+                        'Are you sure you want to permanently delete this task?',
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            BlocProvider.of<TodoDataCubit>(context).delete(
+                              todo.id,
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                    'Successfully removed "${todo.task}"!'),
+                                backgroundColor: Colors.green,
+                              ),
+                            );
+
+                            Navigator.pop(context);
+                          },
+                          child: Text('Delete'),
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.red),
+                            foregroundColor:
+                                MaterialStateProperty.all(Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  background: Container(
+                    alignment: Alignment.centerRight,
+                    color: Colors.red,
+                    child: const Icon(
+                      Icons.delete,
+                      color: Colors.white,
+                    ),
+                  ),
+                  child: ListTile(
+                    title: Text(todo.topic),
+                  ),
                 );
               },
             );

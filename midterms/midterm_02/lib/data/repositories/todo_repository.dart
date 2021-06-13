@@ -25,15 +25,31 @@ class TodoRepository {
     final reference = await todoReference.get();
 
     for (var doc in reference.docs) {
-      todos.add(
-        Todo(
-          topic: doc['topic'],
-          task: doc['task'],
-          description: doc['description'],
-        ),
+      var todo = Todo(
+        topic: doc['topic'],
+        task: doc['task'],
+        description: doc['description'],
       );
+
+      todo.id = doc.id;
+
+      todos.add(todo);
     }
 
     return todos;
+  }
+
+  //აფდეითი აქ
+
+  Future<void> delete(String docId) async {
+    DocumentReference documentReference = _todosCollectionReference
+        .doc(userId)
+        .collection('user todos')
+        .doc(docId);
+
+    await documentReference
+        .delete()
+        .whenComplete(() => print('Todo is deleted!'))
+        .catchError((errorMessage) => print(errorMessage));
   }
 }
