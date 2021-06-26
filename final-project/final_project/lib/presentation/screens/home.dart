@@ -127,7 +127,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         ),
                       ),
                       SizedBox(
-                        height: 175,
+                        height: 170,
                         width: double.infinity,
                         child: Card(
                           elevation: 4,
@@ -141,7 +141,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             ),
                             child: Text(
                               '${state.expenses.fold<double>(0, (previousAmount, element) => previousAmount + element.amount).toStringAsFixed(2)} \$',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: textDark,
                                 fontSize: 20,
                               ),
