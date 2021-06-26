@@ -1,3 +1,4 @@
+import 'package:final_project/presentation/screens/home.dart';
 import 'package:final_project/presentation/screens/login.dart';
 import 'package:flutter/material.dart';
 
@@ -7,26 +8,14 @@ class AppRouter {
       return MaterialPageRoute(
         builder: (_) => const Login(),
       );
-      // } else if (settings.name == Todos.routeName) {
-      //   String userId = settings.arguments as String;
+    } else if (settings.name == Home.routeName) {
+      String userId = settings.arguments as String;
 
-      //   return MaterialPageRoute(
-      //     builder: (_) => Todos(
-      //       userId: userId,
-      //     ),
-      //   );
-      // } else if (settings.name == AddTodo.routeName) {
-      //   return MaterialPageRoute(
-      //     builder: (_) => const AddTodo(),
-      //   );
-      // } else if (settings.name == EditTodo.routeName) {
-      //   Todo todo = settings.arguments as Todo;
-
-      //   return MaterialPageRoute(
-      //     builder: (_) => EditTodo(
-      //       todo: todo,
-      //     ),
-      //   );
+      return MaterialPageRoute(
+        builder: (_) => Home(
+          userId: userId,
+        ),
+      );
     } else {
       return null;
     }
