@@ -1,8 +1,8 @@
 class Expense {
   late String id;
   final String title;
-  final int amount;
-  final DateTime date;
+  final double amount;
+  final String date;
 
   Expense({
     required this.title,
