@@ -1,10 +1,10 @@
 # final_project
 
-A new Flutter project.
+## Personal Expenses App
+
+![app](assets/gifs/app.gif)
 
 ## Getting Started
-
-This project is a starting point for a Flutter application.
 
 A few resources to get you started if this is your first Flutter project:
 
