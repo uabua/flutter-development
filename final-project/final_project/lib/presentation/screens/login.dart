@@ -1,4 +1,5 @@
 import 'package:final_project/logic/cubit/expense_data/expense_data_cubit.dart';
+import 'package:final_project/presentation/screens/home.dart';
 import 'package:final_project/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,17 +45,22 @@ class _LoginState extends State<Login> {
                   width: MediaQuery.of(context).size.width / 2,
                   height: 35,
                   child: TextFormField(
-                    cursorColor: loginScreenTextDark,
+                    cursorColor: textDark,
                     cursorWidth: 1.0,
                     controller: userId,
                     decoration: InputDecoration(
+                      errorStyle: const TextStyle(
+                        height: 0,
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide.none,
                       ),
-                      fillColor: loginScreenLight,
+                      fillColor: customLightGreen,
                       filled: true,
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 8.0,
+                      ),
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -73,27 +79,27 @@ class _LoginState extends State<Login> {
                   height: 35,
                   child: ElevatedButton(
                     onPressed: () {
-                      // if (_formKey.currentState!.validate()) {
-                      //   Navigator.pushNamedAndRemoveUntil(
-                      //     context,
-                      //     Home.routeName,
-                      //     (route) => false,
-                      //     arguments: userId.text,
-                      //   );
+                      if (_formKey.currentState!.validate()) {
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          Home.routeName,
+                          (route) => false,
+                          arguments: userId.text,
+                        );
 
-                      //   BlocProvider.of<ExpenseDataCubit>(context)
-                      //       .emit(ExpenseDataInitial());
-                      // }
+                        BlocProvider.of<ExpenseDataCubit>(context)
+                            .emit(ExpenseDataInitial());
+                      }
                     },
                     child: const Text(
                       'LOGIN',
                       style: TextStyle(
-                        color: loginScreenTextDark,
+                        color: textDark,
                       ),
                     ),
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
-                        loginScreenLight,
+                        customLightGreen,
                       ),
                       shadowColor: MaterialStateProperty.all<Color>(
                         Colors.transparent,
