@@ -5,7 +5,7 @@ final CollectionReference _expensesCollectionReference =
     FirebaseFirestore.instance.collection('expenses');
 
 class ExpenseRepository {
-  static String? userId;
+  String? userId;
 
   Future<void> create(Expense expense) async {
     DocumentReference expenseDocumentReference = _expensesCollectionReference
